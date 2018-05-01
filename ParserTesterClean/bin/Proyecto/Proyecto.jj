@@ -1,0 +1,83 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  static = true;
+}
+
+PARSER_BEGIN(Proyecto)
+package Proyecto;
+
+public class Proyecto
+{  
+}
+
+PARSER_END(Proyecto)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+| < PARENTESIS_CERRADO: ")">
+| < PARENTESIS_ABIERTO: "(">
+| < DOS_PUNTOS: ":">
+| < DOS_PUNTOS_IGUAL:":=">
+| < IGUAL:"=">
+
+}
+
+TOKEN :
+{
+  <P_RED:"P_RED">
+| <VAR:"VAR">
+| <SITIO:"SITIO">
+| <ARCO:"ARCO" >
+| <TRANSICION:"'TRANCISION" >
+| < capacidad:"capacidad">
+|  <FIN_RED:"FIN_RED" >
+|  < marcacion_i:"marcacion_i">
+|  <#DIGITO: ["0"-"9"] >
+|  <NUMERO:(< DIGITO >)+ >
+|  <#LETRA: ["a"-"z"]|["A"-"Z"] >
+|  < PALABRA:(< LETRA >)+ >
+
+
+}
+
+void one_line():
+{}
+{
+	< P_RED > < PALABRA >contenido() < FIN_RED >
+}
+
+void contenido():
+{}
+{
+	(declaracionVariable())*(declaracionSitio())*
+}
+void declaracionVariable():
+{}
+{
+	<VAR > < PALABRA>< IGUAL> < NUMERO>
+}
+void declaracionSitio():
+{
+}
+{
+	<SITIO >< DOS_PUNTOS> < PALABRA>
+		< capacidad>< DOS_PUNTOS_IGUAL> < NUMERO>
+		< marcacion_i><DOS_PUNTOS_IGUAL >< NUMERO>
+}
+
+

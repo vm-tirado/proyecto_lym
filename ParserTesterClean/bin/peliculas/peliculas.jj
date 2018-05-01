@@ -1,0 +1,46 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(peliculas)package peliculas;
+
+public class peliculas{  }PARSER_END(peliculas)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < PLUS : "+" >| < MINUS : "-" >| < MULTIPLY : "*" >| < DIVIDE : "/" >
+| < AND: "&">
+| < OR: "or">
+| < OPEN: "(">
+| < CLOSE:")">
+| < IGUAL:"=">
+}TOKEN :{
+  <CONSTANTE_ACTOR:"actor">
+| <CONSTANTE_KEYWORD:"keyword">
+| <CONSTANTE_DIRECTOR:"director">
+|  <#LETRA: ["a"-"z"] >
+|  <PALABRA: (< LETRA >)+ >
+  
+}
+void one_line():
+{}
+{
+	comando() (opcion())*
+}
+
+void opcion(): 
+{}
+{
+  comando()
+  ( < OR >| < AND > )
+  comando()
+}
+
+void comando():
+{
+}
+{
+  (< OPEN >)caracteristica()(< IGUAL >)(< PALABRA >)(< CLOSE >)
+}
+
+
+void caracteristica():
+{
+}
+{
+  (< CONSTANTE_ACTOR >|< CONSTANTE_KEYWORD >|< CONSTANTE_DIRECTOR >)
+}
