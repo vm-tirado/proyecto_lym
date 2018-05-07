@@ -11,4 +11,6 @@ TRANSICION (Entrar , Exponencial , 3 , 4)
 TRANSICION holaa
 TRANSICION (Entrarho , Uniforme , 3 , 4)
 TRANSICION (Entrarhio , Deteministico , 3 )
+ARCO(hola, hola,1)
+ARCO(hola, hola)
 FIN_RED

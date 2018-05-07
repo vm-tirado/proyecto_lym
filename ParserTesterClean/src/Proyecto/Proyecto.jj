@@ -71,6 +71,7 @@ void contenido():
 	(declaracionVariable())*
 	(declaracionSitio())*
 	(declaracionTransicion())*
+	(declaracionArco())*
 }
 void declaracionVariable():
 {}
@@ -104,6 +105,9 @@ void transicionExponencial(): { } {
 }
 void transicionDeterministico(): { } {
 	<DETERMINISTICO >< COMA>< NUMERO>
+}
+void declaracionArco(): { } {
+	< ARCO>< PARENTESIS_ABIERTO>< PALABRA>< COMA>< PALABRA>(< COMA>< NUMERO>)?< PARENTESIS_CERRADO>
 }
 
 

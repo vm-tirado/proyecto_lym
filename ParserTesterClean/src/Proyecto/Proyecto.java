@@ -47,6 +47,18 @@ public class Proyecto implements ProyectoConstants {
       }
       declaracionTransicion();
     }
+    label_4:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ARCO:
+        ;
+        break;
+      default:
+        jj_la1[3] = jj_gen;
+        break label_4;
+      }
+      declaracionArco();
+    }
   }
 
   static final public void declaracionVariable() throws ParseException {
@@ -67,7 +79,7 @@ public class Proyecto implements ProyectoConstants {
       jj_consume_token(NUMERO);
       break;
     default:
-      jj_la1[3] = jj_gen;
+      jj_la1[4] = jj_gen;
       ;
     }
     jj_consume_token(marcacion_i);
@@ -85,7 +97,7 @@ public class Proyecto implements ProyectoConstants {
       transicionTipo2();
       break;
     default:
-      jj_la1[4] = jj_gen;
+      jj_la1[5] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -110,7 +122,7 @@ public class Proyecto implements ProyectoConstants {
       transicionDeterministico();
       break;
     default:
-      jj_la1[5] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -139,6 +151,24 @@ public class Proyecto implements ProyectoConstants {
     jj_consume_token(NUMERO);
   }
 
+  static final public void declaracionArco() throws ParseException {
+    jj_consume_token(ARCO);
+    jj_consume_token(PARENTESIS_ABIERTO);
+    jj_consume_token(PALABRA);
+    jj_consume_token(COMA);
+    jj_consume_token(PALABRA);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case COMA:
+      jj_consume_token(COMA);
+      jj_consume_token(NUMERO);
+      break;
+    default:
+      jj_la1[7] = jj_gen;
+      ;
+    }
+    jj_consume_token(PARENTESIS_CERRADO);
+  }
+
   static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
   static public ProyectoTokenManager token_source;
@@ -149,13 +179,13 @@ public class Proyecto implements ProyectoConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[6];
+  static final private int[] jj_la1 = new int[8];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x8000,0x10000,0x40000,0x400000,0x10000400,0x380000,};
+      jj_la1_0 = new int[] {0x8000,0x10000,0x40000,0x20000,0x400000,0x10000400,0x380000,0x20000000,};
    }
 
   /** Constructor with InputStream. */
@@ -176,7 +206,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -190,7 +220,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -207,7 +237,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -217,7 +247,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -233,7 +263,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -242,7 +272,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -298,7 +328,7 @@ public class Proyecto implements ProyectoConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 8; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
