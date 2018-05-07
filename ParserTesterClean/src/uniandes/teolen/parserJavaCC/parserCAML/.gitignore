@@ -1,3 +1,7 @@
 /ParserCAMLco.java
 /ParserCAMLcoConstants.java
 /ParserCAMLcoTokenManager.java
+/ParseException.java
+/SimpleCharStream.java
+/Token.java
+/TokenMgrError.java

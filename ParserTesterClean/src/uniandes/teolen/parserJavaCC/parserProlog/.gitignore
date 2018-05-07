@@ -1,3 +1,7 @@
 /ParserProlog.java
 /ParserPrologConstants.java
 /ParserPrologTokenManager.java
+/ParseException.java
+/SimpleCharStream.java
+/Token.java
+/TokenMgrError.java

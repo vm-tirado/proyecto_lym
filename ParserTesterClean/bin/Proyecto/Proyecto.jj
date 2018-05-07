@@ -9,8 +9,11 @@ options
 PARSER_BEGIN(Proyecto)
 package Proyecto;
 
+import java.util.*;
 public class Proyecto
-{  
+{
+    static ArrayList<String> transiciones= new ArrayList<String >();
+    static ArrayList<String> sitios = new ArrayList<String >();
 }
 
 PARSER_END(Proyecto)
@@ -59,13 +62,13 @@ TOKEN :
 
 }
 
-void one_line():
+void one_line() throws Exception:
 {}
 {
 	< P_RED > < PALABRA >contenido() < FIN_RED >
 }
 
-void contenido():
+void contenido() throws Exception:
 {}
 {
 	(declaracionVariable())*
@@ -80,22 +83,44 @@ void declaracionVariable():
 }
 void declaracionSitio():
 {
+  Token sitio;
 }
 {
-	<SITIO >< DOS_PUNTOS> < PALABRA>
+	<SITIO >< DOS_PUNTOS>sitio= < PALABRA>
 		( < capacidad>< DOS_PUNTOS_IGUAL> < NUMERO> )?
 		< marcacion_i><DOS_PUNTOS_IGUAL >< NUMERO>
+		{
+		  sitios.add(sitio.image);
+		  System.out.println("añadio a s "+sitio.image);
+		}
 }
 void declaracionTransicion():
-{}
+{
+  Token trans;
+}
 {
 	<TRANSICION> (transicionTipo1()|transicionTipo2())	
 }
-void transicionTipo1(): { } {
-  < PALABRA>
+void transicionTipo1():
+{
+  Token trans;
 }
-void transicionTipo2(): { } {
-  < PARENTESIS_ABIERTO> < PALABRA>< COMA>(transicionUniforme()|transicionExponencial()|transicionDeterministico()) < PARENTESIS_CERRADO>
+{
+  trans=< PALABRA>
+  {
+    transiciones.add(trans.image);
+    System.out.println("añadio a t "+trans.image);
+  }
+}
+void transicionTipo2():
+ {
+   Token trans;
+ } {
+  < PARENTESIS_ABIERTO> trans=< PALABRA>< COMA>(transicionUniforme()|transicionExponencial()|transicionDeterministico()) < PARENTESIS_CERRADO>
+   {
+    transiciones.add(trans.image);
+    System.out.println("añadio a t "+trans.image);
+  }
 }
 void transicionUniforme(): { } {
 	<UNIFORME >< COMA>< NUMERO>< COMA>< NUMERO>
@@ -106,8 +131,65 @@ void transicionExponencial(): { } {
 void transicionDeterministico(): { } {
 	<DETERMINISTICO >< COMA>< NUMERO>
 }
-void declaracionArco(): { } {
-	< ARCO>< PARENTESIS_ABIERTO>< PALABRA>< COMA>< PALABRA>(< COMA>< NUMERO>)?< PARENTESIS_CERRADO>
+void declaracionArco() throws Exception:
+ {
+   Token nom1;
+   Token nom2;
+ }
+ {
+	< ARCO>< PARENTESIS_ABIERTO> nom1=< PALABRA>< COMA>nom2=< PALABRA>(< COMA>< NUMERO>)?< PARENTESIS_CERRADO>
+	{
+
+    boolean sit1=false;
+    for (int i =0; i<sitios.size() && !sit1; i++)
+    {
+      if (sitios.get(i).equals(nom1.image))
+      {
+        sit1 =true;
+      }
+    }
+    boolean sit2=false;
+    for (int i =0; i<sitios.size() && !sit2; i++)
+    {
+      if (sitios.get(i).equals(nom2.image))
+      {
+        sit2 =true;
+      }
+    }
+
+    boolean tr1=false;
+    for (int i =0; i<transiciones.size() && !tr1; i++)
+    {
+      if (transiciones.get(i).equals(nom1.image))
+      {
+        tr1 =true;
+      }
+    }
+    boolean tr2=false;
+    for (int i =0; i<transiciones.size() && !tr2; i++)
+    {
+      if (transiciones.get(i).equals(nom2.image))
+      {
+        tr2 =true;
+      }
+    }
+
+	  if (sit2 && sit1 )
+	  {
+	    throw new Exception ("No se puede hacer un arco entre dos sitios");
+	  }
+	  else if (tr1 && tr2)
+	  {
+	    throw new Exception ("No se puede hacer un arco entre dos transiciones");
+	  }
+	  else if (!sit1 && !tr1)
+	  {
+	    throw new Exception ("No existe una transicion o sitio con el nombre "+ nom1.image);
+	  }
+
+	  	  else if (!sit2 && tr2 )
+	  {
+	    throw new Exception ("No existe una transicion o sitio con el nombre "+ nom2.image);
+	  }
+	}
 }
-
-
