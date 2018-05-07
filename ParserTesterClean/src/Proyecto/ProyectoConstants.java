@@ -39,19 +39,27 @@ public interface ProyectoConstants {
   /** RegularExpression Id. */
   int TRANSICION = 18;
   /** RegularExpression Id. */
-  int capacidad = 19;
+  int UNIFORME = 19;
   /** RegularExpression Id. */
-  int FIN_RED = 20;
+  int EXPONENCIAL = 20;
   /** RegularExpression Id. */
-  int marcacion_i = 21;
+  int DETERMINISTICO = 21;
   /** RegularExpression Id. */
-  int DIGITO = 22;
+  int capacidad = 22;
   /** RegularExpression Id. */
-  int NUMERO = 23;
+  int FIN_RED = 23;
   /** RegularExpression Id. */
-  int LETRA = 24;
+  int marcacion_i = 24;
   /** RegularExpression Id. */
-  int PALABRA = 25;
+  int DIGITO = 25;
+  /** RegularExpression Id. */
+  int NUMERO = 26;
+  /** RegularExpression Id. */
+  int LETRA = 27;
+  /** RegularExpression Id. */
+  int PALABRA = 28;
+  /** RegularExpression Id. */
+  int COMA = 29;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -76,7 +84,10 @@ public interface ProyectoConstants {
     "\"VAR\"",
     "\"SITIO\"",
     "\"ARCO\"",
-    "\"\\\'TRANCISION\"",
+    "\"TRANSICION\"",
+    "\"Uniforme\"",
+    "\"Exponencial\"",
+    "\"Deteministico\"",
     "\"capacidad\"",
     "\"FIN_RED\"",
     "\"marcacion_i\"",
@@ -84,6 +95,7 @@ public interface ProyectoConstants {
     "<NUMERO>",
     "<LETRA>",
     "<PALABRA>",
+    "\",\"",
   };
 
 }

@@ -35,6 +35,18 @@ public class Proyecto implements ProyectoConstants {
       }
       declaracionSitio();
     }
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case TRANSICION:
+        ;
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        break label_3;
+      }
+      declaracionTransicion();
+    }
   }
 
   static final public void declaracionVariable() throws ParseException {
@@ -48,11 +60,82 @@ public class Proyecto implements ProyectoConstants {
     jj_consume_token(SITIO);
     jj_consume_token(DOS_PUNTOS);
     jj_consume_token(PALABRA);
-    jj_consume_token(capacidad);
-    jj_consume_token(DOS_PUNTOS_IGUAL);
-    jj_consume_token(NUMERO);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case capacidad:
+      jj_consume_token(capacidad);
+      jj_consume_token(DOS_PUNTOS_IGUAL);
+      jj_consume_token(NUMERO);
+      break;
+    default:
+      jj_la1[3] = jj_gen;
+      ;
+    }
     jj_consume_token(marcacion_i);
     jj_consume_token(DOS_PUNTOS_IGUAL);
+    jj_consume_token(NUMERO);
+  }
+
+  static final public void declaracionTransicion() throws ParseException {
+    jj_consume_token(TRANSICION);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PALABRA:
+      transicionTipo1();
+      break;
+    case PARENTESIS_ABIERTO:
+      transicionTipo2();
+      break;
+    default:
+      jj_la1[4] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void transicionTipo1() throws ParseException {
+    jj_consume_token(PALABRA);
+  }
+
+  static final public void transicionTipo2() throws ParseException {
+    jj_consume_token(PARENTESIS_ABIERTO);
+    jj_consume_token(PALABRA);
+    jj_consume_token(COMA);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case UNIFORME:
+      transicionUniforme();
+      break;
+    case EXPONENCIAL:
+      transicionExponencial();
+      break;
+    case DETERMINISTICO:
+      transicionDeterministico();
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PARENTESIS_CERRADO);
+  }
+
+  static final public void transicionUniforme() throws ParseException {
+    jj_consume_token(UNIFORME);
+    jj_consume_token(COMA);
+    jj_consume_token(NUMERO);
+    jj_consume_token(COMA);
+    jj_consume_token(NUMERO);
+  }
+
+  static final public void transicionExponencial() throws ParseException {
+    jj_consume_token(EXPONENCIAL);
+    jj_consume_token(COMA);
+    jj_consume_token(NUMERO);
+    jj_consume_token(COMA);
+    jj_consume_token(NUMERO);
+  }
+
+  static final public void transicionDeterministico() throws ParseException {
+    jj_consume_token(DETERMINISTICO);
+    jj_consume_token(COMA);
     jj_consume_token(NUMERO);
   }
 
@@ -66,13 +149,13 @@ public class Proyecto implements ProyectoConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[2];
+  static final private int[] jj_la1 = new int[6];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x8000,0x10000,};
+      jj_la1_0 = new int[] {0x8000,0x10000,0x40000,0x400000,0x10000400,0x380000,};
    }
 
   /** Constructor with InputStream. */
@@ -93,7 +176,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -107,7 +190,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -124,7 +207,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -134,7 +217,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -150,7 +233,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -159,7 +242,7 @@ public class Proyecto implements ProyectoConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -210,12 +293,12 @@ public class Proyecto implements ProyectoConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[26];
+    boolean[] la1tokens = new boolean[30];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 6; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -224,7 +307,7 @@ public class Proyecto implements ProyectoConstants {
         }
       }
     }
-    for (int i = 0; i < 26; i++) {
+    for (int i = 0; i < 30; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

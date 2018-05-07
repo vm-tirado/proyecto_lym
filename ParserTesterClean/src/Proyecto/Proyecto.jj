@@ -43,7 +43,10 @@ TOKEN :
 | <VAR:"VAR">
 | <SITIO:"SITIO">
 | <ARCO:"ARCO" >
-| <TRANSICION:"'TRANCISION" >
+| <TRANSICION:"TRANSICION" >
+| <UNIFORME:"Uniforme" >
+| <EXPONENCIAL:"Exponencial" >
+| <DETERMINISTICO :"Deteministico">
 | < capacidad:"capacidad">
 |  <FIN_RED:"FIN_RED" >
 |  < marcacion_i:"marcacion_i">
@@ -51,6 +54,7 @@ TOKEN :
 |  <NUMERO:(< DIGITO >)+ >
 |  <#LETRA: ["a"-"z"]|["A"-"Z"] >
 |  < PALABRA:(< LETRA >)+ >
+|  <COMA:",">
 
 
 }
@@ -64,7 +68,9 @@ void one_line():
 void contenido():
 {}
 {
-	(declaracionVariable())*(declaracionSitio())*
+	(declaracionVariable())*
+	(declaracionSitio())*
+	(declaracionTransicion())*
 }
 void declaracionVariable():
 {}
@@ -76,8 +82,28 @@ void declaracionSitio():
 }
 {
 	<SITIO >< DOS_PUNTOS> < PALABRA>
-		< capacidad>< DOS_PUNTOS_IGUAL> < NUMERO>
+		( < capacidad>< DOS_PUNTOS_IGUAL> < NUMERO> )?
 		< marcacion_i><DOS_PUNTOS_IGUAL >< NUMERO>
+}
+void declaracionTransicion():
+{}
+{
+	<TRANSICION> (transicionTipo1()|transicionTipo2())	
+}
+void transicionTipo1(): { } {
+  < PALABRA>
+}
+void transicionTipo2(): { } {
+  < PARENTESIS_ABIERTO> < PALABRA>< COMA>(transicionUniforme()|transicionExponencial()|transicionDeterministico()) < PARENTESIS_CERRADO>
+}
+void transicionUniforme(): { } {
+	<UNIFORME >< COMA>< NUMERO>< COMA>< NUMERO>
+}
+void transicionExponencial(): { } {
+	<EXPONENCIAL >< COMA>< NUMERO>< COMA>< NUMERO>
+}
+void transicionDeterministico(): { } {
+	<DETERMINISTICO >< COMA>< NUMERO>
 }
 
 
